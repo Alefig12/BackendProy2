@@ -9,6 +9,11 @@ const usuarioSchema = mongoose.Schema({
 	address: { type: String, required: [true, 'Address required'] },
 	isAdmin: { type: Boolean, required: [true, 'Type of user required'] },
 	jwt: { type: String, required: false, default: '' },
+	twofa: { type: {
+		secret: String,
+		uri: String,
+		qr: String,
+	}, required: false, default: '' },
 	isDeleted: { type: Boolean, default: false },
 
 });

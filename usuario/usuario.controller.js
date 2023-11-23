@@ -1,5 +1,6 @@
 import usuario from './usuario.model.js';
 const jwt = require('jsonwebtoken');
+const twofactor = require('node-2fa');
 
 
 
@@ -13,13 +14,32 @@ export async function getUserById(req, res) {
 	res.status(200).json(user);
 }
 
+export async function getTwoFactorQR(req, res) {
+	const { id } = req.params;
+	const user = await usuario.findById(id);
+	if (!user || user.isDeleted) {
+		res.status(404).json({ message: 'User not found' });
+		return;
+	}
+	res.status(200).json(user.twofa.qr);
+}
+
 export async function loginUser(req, res) {
-	const { email, password } = req.body;
+	const { email, password, tfactor } = req.body;
 	const hashedPassword= await hashedPassword (password);
 	const user = await usuario.findOne({ email, password:hashedPassword});
 	if (!user || user.isDeleted) {
 		res.status(404).json({ message: 'User not found' });
 		return;
+	}
+
+	if (user.isAdmin) {
+		
+		const resp = twofactor.verifyToken(user.twofa.secret, tfactor);
+		if (!resp || !resp.delta) {
+			res.status(401).json({ message: 'Invalid token' });
+			return;
+		}
 	}
 
 	var payload = {
@@ -39,6 +59,18 @@ export async function createUser(req, res) {
 		const { name, lastName, email, password, phoneNo, address, isAdmin } = req.body;
 		const hashedPassword = await hashedPassword(password);
 		const user = new usuario({ name, lastName, email, password:hashedPassword, phoneNo, address, isAdmin });
+
+		if (isAdmin) {
+			const secret = twofactor.generateSecret({ name: 'RappiMocho', account: email });
+			user.twofa = {
+				secret: secret.secret,
+				uri: secret.uri,
+				qr: secret.qr,
+			};
+
+
+		}
+
 		const result = await user.save();
 		res.status(200).json(result);
 	} catch (err) {

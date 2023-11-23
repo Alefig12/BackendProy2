@@ -1,4 +1,5 @@
 import restaurante from './restaurante.model.js';
+const jwt = require('jsonwebtoken');
 
 export async function getRestaurantById(req, res) {
 	const { id } = req.params;

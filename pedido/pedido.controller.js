@@ -1,4 +1,5 @@
 import pedido from './pedido.model.js';
+const jwt = require('jsonwebtoken');
 
 export async function getPedidoById(req, res) {
 	const { id } = req.params;

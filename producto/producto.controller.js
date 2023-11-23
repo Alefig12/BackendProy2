@@ -1,5 +1,6 @@
 import producto from './producto.model.js';
 import restaurante from './restaurante.model.js';
+const jwt = require('jsonwebtoken');
 
 
 export async function getProductoById(req, res) {
