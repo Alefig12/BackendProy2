@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +23,9 @@
     "@babel/core": "^7.21.0",
     "@babel/node": "^7.17.10",
     "@babel/preset-env": "^7.20.2",
+    "jest": "^29.7.0",
     "nodemon": "^2.0.20",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.4",
+    "supertest": "^6.3.3"
   }
 }
