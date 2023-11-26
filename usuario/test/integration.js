@@ -3,15 +3,14 @@ const express = require('express');
 const app = express();
 
 const{
-    getUsuario,
-    getUsuarioById,
-    postUsuario,
-    putUsuario,
-    deleteUsuario
+    getUser,
+    getUserById,
+    createUser,
+    putUser
 } = require('../usuario.controller.js');
 const userRoutes = require('../usuario.routes.js');
 
-app.use('/user', userRoutes);
+app.use('/usuario', userRoutes);
 
 describe('pruebas de integración usuarios', () => {
     it('GET / debería devolver todos los usuarios', async () => {
