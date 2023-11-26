@@ -31,13 +31,13 @@ import usuarioRoutes from './usuario/usuario.routes.js';
 app.use('/user', usuarioRoutes);
 
 import restauranteRoutes from './restaurante/restaurante.routes.js';
-app.use('/restaurant', restauranteRoutes);
+app.use('/restaurante', restauranteRoutes);
 
 import productoRoutes from './producto/producto.routes.js';
-app.use('/product', productoRoutes);
+app.use('/producto', productoRoutes);
 
 import pedidoRoutes from './pedido/pedido.routes.js';
-app.use('/order', pedidoRoutes);
+app.use('/pedido', pedidoRoutes);
 
 // Endpoint para 404
 app.use((req, res) => {

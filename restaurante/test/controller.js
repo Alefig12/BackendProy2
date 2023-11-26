@@ -77,7 +77,7 @@ describe('Controlador de Restaurante', () => {
    //Pruebas para casos de no éxito
     it('No debería obtener un restaurante por un ID inexistente', async () => {
         const response = await supertest(app)
-        .get(`/restaurante/id-inexistente`);
+        .get(`/restaurante/321231321321`);
 
         expect(response.status).toBe(404);
     });

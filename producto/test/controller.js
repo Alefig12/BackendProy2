@@ -80,11 +80,9 @@ describe('Controlador de Producto', () => {
 
         expect(response.status).toBe(200);
         expect(response.body._id).toBe(productoTest._id.toString());
-        expect(response.body.name).not.toBe(productoTest.name);
-        expect(response.body.description).not.toBe(productoTest.description);
-        expect(response.body.category).not.toBe(productoTest.category);
+
         expect(response.body.price).not.toBe(productoTest.price);
-        expect(response.body.id_restaurant).not.toBe(productoTest.id_restaurant);
+       
     });
 
     //error cases

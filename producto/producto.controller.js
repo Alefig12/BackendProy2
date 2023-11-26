@@ -7,7 +7,7 @@ export async function getProductoById(req, res) {
 	const { id } = req.params;
 	const product = await producto.findById(id);
 	if (!product || product.isDeleted) {
-		res.status(404).json({ message: 'Product not found' });
+		res.status(404).json({ message: 'Producto no encontrado' });
 		return;
 	}
 	res.status(200).json(product);
@@ -72,7 +72,7 @@ export async function updateProducto(req, res) {
 		}
 		const product = await producto.findById(id);
 		if (!product || product.isDeleted) {
-			res.status(404).json({ message: 'Product not found' });
+			res.status(404).json({ message: 'Producto no encontrado' });
 			return;
 		}
 		product.name = name;
